@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import logo from '../assets/images/75logo.png'
 import { MdOutlineManageAccounts } from "react-icons/md";
 
-
 const Navbar = () => {
+    const location = useLocation()
+    const isHomePage = location.pathname === '/'
 
     const links = [
         { name: 'HOME', path: '/' },
@@ -14,49 +15,40 @@ const Navbar = () => {
         { name: 'MEN', path: '/men' },
     ]
 
-
-
-
-
     return (
-        <header className='absolute z-10 flex w-full justify-between items-center px-4'>
-
+        <header className={`${isHomePage ? 'absolute' : 'relative bg-white border-b border-gray-100'} z-50 flex w-full justify-between items-center px-4 py-2`}>
             {/* logo section */}
-            <div>
-                <img src={logo} alt="logo" className='rounded-[50%] h-15 w-30 mt-2' />
-            </div>
+            <Link to="/" className="flex items-center">
+                <img src={logo} alt="logo" className='rounded-full h-12 w-24 md:h-14 md:w-28 object-contain' />
+            </Link>
 
             {/* links section */}
-            <nav className="hidden md:flex space-x-8 text-white font-semibold text-lg">
+            <nav className={`hidden lg:flex space-x-10 ${isHomePage ? 'text-white' : 'text-[#1a1a1a]'} font-bold text-[13px] tracking-widest`}>
                 {links.map((link) => (
-                    <Link
+                    <NavLink
                         key={link.name}
                         to={link.path}
-                        className="relative group"
+                        className={({ isActive }) => `
+                            relative py-2 transition-colors hover:text-black/70
+                            ${isActive ? 'after:content-[""] after:absolute after:left-0 after:bottom-0 after:w-full after:h-[2px] after:bg-current' : ''}
+                        `}
                     >
-                        <span>{link.name}</span>
-                        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                    </Link>
+                        {link.name}
+                    </NavLink>
                 ))}
             </nav>
 
-            {/* <nav className='flex text-white space-x-4 font-semibold gap-6 text-2xl'>
-                <Link to="/">Home</Link>
-                <Link to="/clearance">Clearance</Link>
-                <Link to="/new-arrivals">New Arrivals</Link>
-                <Link to="/women">Women</Link>
-                <Link to="/men">Men</Link>
-            </nav> */}
-
-            {/* search and logout section */}
-            <div className="hidden md:flex space-x-2">
-                <input
-                    type="text"
-                    placeholder="Search products..."
-                    className="p-2 rounded-md border-b-2 focus:border-gray-300 text-white focus:outline-hidden bg-transparent"
-                />
-                <button className=" text-white rounded-md px-4 py-2">
-                    <MdOutlineManageAccounts size={30} />
+            {/* search and account section */}
+            <div className={`hidden md:flex items-center space-x-4 ${isHomePage ? 'text-white' : 'text-[#1a1a1a]'}`}>
+                <div className="relative group">
+                    <input
+                        type="text"
+                        placeholder="Search products..."
+                        className={`p-2 w-48 rounded-md border-b bg-transparent transition-all focus:w-64 focus:outline-none placeholder:text-inherit/50 border-current/20 focus:border-current`}
+                    />
+                </div>
+                <button className="hover:opacity-70 transition-opacity">
+                    <MdOutlineManageAccounts size={28} />
                 </button>
             </div>
         </header>
