@@ -2,6 +2,8 @@ import React from 'react'
 import Hero from '../components/Hero'
 import Cards from '../components/Cards'
 import CategorySection from '../components/CategorySection'
+import Testimonials from '../components/Testimonials'
+import Footer from '../components/Footer'
 import image1 from '../assets/images/1.jpeg'
 import image2 from '../assets/images/6.png'
 import image3 from "../assets/images/100.png"
@@ -85,6 +87,50 @@ const Home = () => {
             </section>
 
             <CategorySection />
+
+
+            {/*--------------------------- Explore By Category Section ------------------------- */}
+
+            <section className="py-4 px-4 md:px-12 max-w-[1600px] mx-auto relative">
+                <div className="flex flex-col items-center mb-8">
+                    <h2 className="text-[20px] md:text-[24px] font-bold tracking-[0.2em] text-[#1a1a1a] mb-2 uppercase text-center">
+                        Explore By Category
+                    </h2>
+                    {/* <p className="text-[14px] md:text-[15px] text-[#666] font-light text-center">
+                        Tailored to keep you cozy this winter season!
+                    </p> */}
+                </div>
+
+                {/* Grid Container with Arrows */}
+                <div className="relative group/carousel">
+                    {/* Left Arrow */}
+                    <button className="absolute -left-5 md:left-[-50px] top-[35%] -translate-y-1/2 text-[#333] hover:text-black transition-all z-30 opacity-60 hover:opacity-100 hidden sm:block">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                    </button>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8">
+                        {products && products.map((product, index) => (
+                            <Cards
+                                key={index}
+                                image={product.image}
+                            // title={product.title}
+                            // price={product.price}
+                            // oldPrice={product.oldPrice}
+                            // discount={product.discount}
+                            />
+                        ))}
+                    </div>
+
+                    {/* Right Arrow */}
+                    <button className="absolute -right-5 md:right-[-50px] top-[35%] -translate-y-1/2 text-[#333] hover:text-black transition-all z-30 opacity-60 hover:opacity-100 hidden sm:block">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                    </button>
+                </div>
+            </section>
+
+            <Testimonials />
+
+            <Footer />
 
             {/* Floating Buttons */}
             {/* WhatsApp */}
