@@ -5,6 +5,8 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 import logo from '../assets/images/75logo.png' // Assuming this is the logo, or I might need a text logo 'Zane'
 import img5 from '../assets/images/16.png'
 import img1 from '../assets/images/1.jpeg'
+import unionPayIcon from '../assets/icons/unionpay-card.svg'
+import mastarCard from '../assets/icons/mastercard-svg.svg'
 
 const Checkout = () => {
     const [showOrderSummary, setShowOrderSummary] = useState(false)
@@ -184,16 +186,16 @@ const Checkout = () => {
                                         </div>
                                         <span className="text-[14px] text-[#333] font-medium">Online Payment through Bank Debit & Credit Cards</span>
                                     </div>
-                                    <div className="flex gap-1.5 opacity-90">
-                                        <div className="bg-white border border-gray-200 rounded px-1.5 py-1">
-                                            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa-319d545c6fd255c9aad5eeaad21fd6f7f7b4fdbdb1a35ce83b89cca12a187f00.svg" alt="Visa" className="h-[20px]" />
+                                    <div className="flex items-center gap-2">
+                                        <div className="flex items-center justify-center">
+                                            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa-319d545c6fd255c9aad5eeaad21fd6f7f7b4fdbdb1a35ce83b89cca12a187f00.svg" alt="Visa" className="h-[15px] w-auto" />
                                         </div>
-                                        <div className="bg-white border border-gray-200 rounded px-1.5 py-1">
-                                            <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/master-173035bc8124581983d455421f5310be8c181f18bd4d7cb99d4af426a63a539e.svg" alt="Mastercard" className="h-[20px]" />
+                                        <div className="flex items-center justify-center">
+                                            <img src={mastarCard} alt="Mastercard" className="h-[20px] w-auto" />
                                         </div>
                                     </div>
                                 </label>
-                                <div className="p-8 border-x border-b border-gray-200 bg-[#fafafa] flex flex-col items-center justify-center gap-4 text-center rounded-b-md mx-[1px] mb-[1px]">
+                                <div className="p-8  bg-[#fafafa] flex flex-col items-center justify-center gap-4 text-center ">
                                     <div className="w-[140px] h-[90px] mx-auto border border-gray-300 bg-white rounded flex items-center justify-center relative shadow-sm">
                                         {/* Browser window controls */}
                                         <div className="absolute top-2 left-2 flex gap-1">
@@ -219,10 +221,10 @@ const Checkout = () => {
                                         <input type="radio" name="payment" className="peer h-4 w-4 cursor-pointer appearance-none rounded-full border border-gray-300 hover:border-blue-500 checked:border-blue-600 checked:bg-blue-600 transition-all" />
                                         <div className="absolute w-1.5 h-1.5 bg-white rounded-full opacity-0 peer-checked:opacity-100 pointer-events-none"></div>
                                     </div>
-                                    <span className="text-[14px] text-[#333]">Online Payment through EasyPaisa / Jazz Cash / Bank Transfer</span>
+                                    <span className="text-[13px] text-[#333]">Online Payment through EasyPaisa / Jazz Cash / Bank Transfer</span>
                                 </div>
-                                <div className="bg-white border border-gray-200 rounded px-1.5 py-0.5">
-                                    <img src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/unionpay-d7045c711a3d92fb0869cd2fd70df9c849184ba45dbd4352fb1c225df56f9a56.svg" alt="UnionPay" className="h-[20px]" />
+                                <div className="flex items-center">
+                                    <img src={unionPayIcon} alt="UnionPay" className="h-[24px] w-auto" />
                                 </div>
                             </label>
 
@@ -269,10 +271,10 @@ const Checkout = () => {
                     </div>
 
                 </div>
-            </div>
+            </div >
 
             {/* Right Side - Static Summary */}
-            <div className="hidden lg:block w-[45%] bg-[#fafafa] border-l border-gray-200 h-screen sticky top-0 overflow-y-auto">
+            <div div className="hidden lg:block w-[45%] bg-[#fafafa] border-l border-gray-200 h-screen sticky top-0 overflow-y-auto" >
                 <div className="max-w-[450px] p-12">
                     <div className="space-y-4 mb-6 pb-6 border-b border-gray-200">
                         {cartItems.map((item) => (
@@ -327,8 +329,8 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

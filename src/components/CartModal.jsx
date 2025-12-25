@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MdClose } from 'react-icons/md'
 import { FaTruck } from 'react-icons/fa'
+import LoyaltyPointsModal from './LoyaltyPointsModal'
 import img5 from '../assets/images/16.png'
 import img1 from '../assets/images/1.jpeg'
 
@@ -9,6 +10,7 @@ const CartModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null
 
     const navigate = useNavigate()
+    const [showLoyaltyModal, setShowLoyaltyModal] = useState(false)
 
     const cartItems = [
         {
@@ -124,13 +126,32 @@ const CartModal = ({ isOpen, onClose }) => {
                             >
                                 View Cart
                             </button>
-                            <button className="w-full py-3.5 border border-[#333] text-[#333] text-[12px] font-normal tracking-[0.05em] hover:bg-gray-50 transition-colors">
+                            <button
+                                onClick={() => setShowLoyaltyModal(true)}
+                                className="w-full py-3.5 border border-[#333] text-[#333] text-[12px] font-normal tracking-[0.05em] hover:bg-gray-50 transition-colors"
+                            >
                                 Checkout using Rewards
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Loyalty Points Modal */}
+            <LoyaltyPointsModal
+                isOpen={showLoyaltyModal}
+                onClose={() => setShowLoyaltyModal(false)}
+                onYes={() => {
+                    setShowLoyaltyModal(false)
+                    onClose()
+                    navigate('/checkout')
+                }}
+                onNo={() => {
+                    setShowLoyaltyModal(false)
+                    onClose()
+                    navigate('/checkout')
+                }}
+            />
         </div>
     )
 }
