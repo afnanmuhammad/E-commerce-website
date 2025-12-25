@@ -1,12 +1,15 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { MdClose } from 'react-icons/md'
 import { FaTruck } from 'react-icons/fa'
 import Footer from '../components/Footer'
+import LoyaltyPointsModal from '../components/LoyaltyPointsModal'
 import img5 from '../assets/images/16.png'
 import img1 from '../assets/images/1.jpeg'
 
 const Cart = () => {
+    const navigate = useNavigate()
+    const [showLoyaltyModal, setShowLoyaltyModal] = useState(false)
     const cartItems = [
         {
             id: 1,
@@ -169,7 +172,10 @@ const Cart = () => {
                                 Proceed to Checkout
                             </Link>
 
-                            <button className="w-full bg-white border border-gray-300 text-[#1a1a1a] py-3 text-[13px] hover:bg-gray-50 transition-colors">
+                            <button
+                                onClick={() => setShowLoyaltyModal(true)}
+                                className="w-full bg-white border border-gray-300 text-[#1a1a1a] py-3 text-[13px] hover:bg-gray-50 transition-colors"
+                            >
                                 Checkout using Rewards
                             </button>
                         </div>
@@ -196,6 +202,20 @@ const Cart = () => {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                 </button>
             </div>
+
+            {/* Loyalty Points Modal */}
+            <LoyaltyPointsModal
+                isOpen={showLoyaltyModal}
+                onClose={() => setShowLoyaltyModal(false)}
+                onYes={() => {
+                    setShowLoyaltyModal(false)
+                    navigate('/checkout')
+                }}
+                onNo={() => {
+                    setShowLoyaltyModal(false)
+                    navigate('/checkout')
+                }}
+            />
         </div>
     )
 }
