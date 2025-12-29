@@ -12,6 +12,8 @@ import img7 from "../assets/images/64.png";
 import img8 from "../assets/images/66.png";
 import img9 from "../assets/images/87.png";
 import img10 from "../assets/images/91.png";
+import img11 from "../assets/images/72.png";
+import img12 from "../assets/images/83.png";
 
 const Men = () => {
   const products = [
@@ -39,12 +41,7 @@ const Men = () => {
       price: "Rs.6,450.00",
       colors: ["#b2beb5", "#000000"],
     },
-    {
-      image: img7,
-      title: "ESSENTIAL CREW NECK T-SHIRT - NAVY",
-      price: "Rs.2,450.00",
-      colors: ["#000080", "#ffffff", "#000000"],
-    },
+
     {
       image: img8,
       title: "RELAXED FIT CARGO TROUSERS - KHAKI",
@@ -78,6 +75,26 @@ const Men = () => {
       title: "CASUAL DENIM SHIRT - BLUE",
       price: "Rs.4,450.00",
       colors: ["#4682b4"],
+    },
+    {
+      image: img11,
+      title: "SLIM FIT CHINOS - BEIGE",
+      price: "Rs.3,950.00",
+      colors: ["#f5f5dc", "#000000", "#000080"],
+    },
+    {
+      image: img12,
+      title: "PREMIUM COTTON SHIRT - WHITE",
+      price: "Rs.4,850.00",
+      oldPrice: "Rs.5,950.00",
+      discount: "-18%",
+      colors: ["#ffffff", "#87ceeb"],
+    },
+    {
+      image: img7,
+      title: "ESSENTIAL CREW NECK T-SHIRT - NAVY",
+      price: "Rs.2,450.00",
+      colors: ["#000080", "#ffffff", "#000000"],
     },
   ];
 

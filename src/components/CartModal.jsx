@@ -3,33 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { MdClose } from 'react-icons/md'
 import { FaTruck } from 'react-icons/fa'
 import LoyaltyPointsModal from './LoyaltyPointsModal'
-import img5 from '../assets/images/16.png'
-import img1 from '../assets/images/1.jpeg'
+import { useCart } from '../context/CartContext'
 
 const CartModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null
 
     const navigate = useNavigate()
     const [showLoyaltyModal, setShowLoyaltyModal] = useState(false)
-
-    const cartItems = [
-        {
-            id: 1,
-            image: img5,
-            title: 'Textured Knitted Polo Shirt – Light Olive',
-            size: 'S',
-            price: 'Rs.4,250.00',
-            quantity: 1
-        },
-        {
-            id: 2,
-            image: img1, // Placeholder for the white jacket
-            title: 'Tailored Herringbone Jacket – White',
-            size: 'S',
-            price: 'Rs.9,560.00',
-            quantity: 10
-        }
-    ]
+    const { cartItems, removeFromCart, updateQuantity, getCartCount, getCartTotal } = useCart()
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
@@ -47,46 +28,59 @@ const CartModal = ({ isOpen, onClose }) => {
                     {/* Left Side - Cart Items */}
                     <div className="flex-1 p-6 md:p-10 border-b lg:border-b-0 lg:border-r border-gray-100">
                         <h2 className="text-[15px] text-[#444] tracking-widest uppercase font-normal mb-8 border-b border-gray-100 pb-2">
-                            Your Cart (11)
+                            Your Cart ({getCartCount()})
                         </h2>
 
                         <div className="space-y-8">
-                            {cartItems.map((item) => (
-                                <div key={item.id} className="flex gap-4 sm:gap-6">
-                                    {/* Image */}
-                                    <div className="w-24 h-32 flex-shrink-0">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full h-full object-cover object-top"
-                                        />
-                                    </div>
-
-                                    {/* Details */}
-                                    <div className="flex flex-1 flex-col justify-between py-1">
-                                        <div>
-                                            <h3 className="text-[14px] text-[#333] font-normal leading-relaxed mb-1 pr-4 font-['Montserrat']">
-                                                {item.title}
-                                            </h3>
-                                            <p className="text-[13px] text-[#666] mb-2">{item.size}</p>
-                                            <p className="text-[14px] text-[#333] mb-4">{item.price}</p>
+                            {cartItems.length === 0 ? (
+                                <p className="text-center text-gray-500 py-10">Your cart is empty.</p>
+                            ) : (
+                                cartItems.map((item) => (
+                                    <div key={`${item.id}-${item.color}-${item.size}`} className="flex gap-4 sm:gap-6">
+                                        {/* Image */}
+                                        <div className="w-24 h-32 flex-shrink-0">
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
+                                                className="w-full h-full object-cover object-top"
+                                            />
                                         </div>
 
-                                        <div className="flex items-center justify-between">
-                                            {/* Quantity Selector */}
-                                            <div className="flex items-center border border-gray-200 rounded-sm">
-                                                <button className="px-3 py-1 text-gray-500 hover:bg-gray-50 transition-colors">-</button>
-                                                <span className="px-2 text-[13px] text-[#333] min-w-[30px] text-center">{item.quantity}</span>
-                                                <button className="px-3 py-1 text-gray-500 hover:bg-gray-50 transition-colors">+</button>
+                                        {/* Details */}
+                                        <div className="flex flex-1 flex-col justify-between py-1">
+                                            <div>
+                                                <h3 className="text-[14px] text-[#333] font-normal leading-relaxed mb-1 pr-4 font-['Montserrat']">
+                                                    {item.title}
+                                                </h3>
+                                                <p className="text-[13px] text-[#666] mb-2">{item.size} / {item.color}</p>
+                                                <p className="text-[14px] text-[#333] mb-4">{item.price}</p>
                                             </div>
 
-                                            <button className="text-[11px] text-[#888] underline hover:text-black transition-colors tracking-wide uppercase">
-                                                Remove
-                                            </button>
+                                            <div className="flex items-center justify-between">
+                                                {/* Quantity Selector */}
+                                                <div className="flex items-center border border-gray-200 rounded-sm">
+                                                    <button
+                                                        onClick={() => updateQuantity(item.id, item.color, item.size, -1)}
+                                                        className="px-3 py-1 text-gray-500 hover:bg-gray-50 transition-colors"
+                                                    >-</button>
+                                                    <span className="px-2 text-[13px] text-[#333] min-w-[30px] text-center">{item.quantity}</span>
+                                                    <button
+                                                        onClick={() => updateQuantity(item.id, item.color, item.size, 1)}
+                                                        className="px-3 py-1 text-gray-500 hover:bg-gray-50 transition-colors"
+                                                    >+</button>
+                                                </div>
+
+                                                <button
+                                                    onClick={() => removeFromCart(item.id, item.color, item.size)}
+                                                    className="text-[11px] text-[#888] underline hover:text-black transition-colors tracking-wide uppercase"
+                                                >
+                                                    Remove
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            )}
                         </div>
                     </div>
 
@@ -103,7 +97,7 @@ const CartModal = ({ isOpen, onClose }) => {
                         {/* Total */}
                         <div className="flex items-center justify-between mb-8">
                             <span className="text-[14px] font-bold tracking-widest text-[#333] uppercase">Total:</span>
-                            <span className="text-[16px] text-[#333]">Rs.99,850.00</span>
+                            <span className="text-[16px] text-[#333]">Rs.{getCartTotal().toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                         </div>
 
                         {/* Actions */}

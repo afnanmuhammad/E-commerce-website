@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { FaFacebookF, FaInstagram, FaWhatsapp } from 'react-icons/fa'
 import { HiOutlineMail } from 'react-icons/hi'
 
@@ -12,11 +13,11 @@ const Footer = () => {
                     <div>
                         <h3 className="text-[14px] font-bold tracking-[0.1em] text-[#1a1a1a] uppercase mb-6">INFORMATION</h3>
                         <ul className="space-y-3">
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">About Us</a></li>
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Contact Us</a></li>
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">FAQs</a></li>
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Privacy Policy</a></li>
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Careers</a></li>
+                            <li><Link to="/about-us" className="text-[13px] text-[#444] hover:text-black transition-colors">About Us</Link></li>
+                            <li><Link to="/contact-us" className="text-[13px] text-[#444] hover:text-black transition-colors">Contact Us</Link></li>
+                            <li><Link to="/faqs" className="text-[13px] text-[#444] hover:text-black transition-colors">FAQs</Link></li>
+                            <li><Link to="/privacy-policy" className="text-[13px] text-[#444] hover:text-black transition-colors">Privacy Policy</Link></li>
+                            <li><Link to="/careers" className="text-[13px] text-[#444] hover:text-black transition-colors">Careers</Link></li>
                         </ul>
                     </div>
 
@@ -24,8 +25,8 @@ const Footer = () => {
                     <div>
                         <h3 className="text-[14px] font-bold tracking-[0.1em] text-[#1a1a1a] uppercase mb-6">QUICK SHOP</h3>
                         <ul className="space-y-3">
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Men</a></li>
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Women</a></li>
+                            <li><Link to="/men" className="text-[13px] text-[#444] hover:text-black transition-colors">Men</Link></li>
+                            <li><Link to="/women" className="text-[13px] text-[#444] hover:text-black transition-colors">Women</Link></li>
                         </ul>
                     </div>
 
@@ -33,10 +34,10 @@ const Footer = () => {
                     <div>
                         <h3 className="text-[14px] font-bold tracking-[0.1em] text-[#1a1a1a] uppercase mb-6">CUSTOMER SERVICES</h3>
                         <ul className="space-y-3">
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Terms & Conditions</a></li>
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Shipping & Delivery</a></li>
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Track your Order</a></li>
-                            <li><a href="#" className="text-[13px] text-[#444] hover:text-black transition-colors">Returns & Exchange Policy</a></li>
+                            <li><Link to="/terms-conditions" className="text-[13px] text-[#444] hover:text-black transition-colors">Terms & Conditions</Link></li>
+                            <li><Link to="/shipping-delivery" className="text-[13px] text-[#444] hover:text-black transition-colors">Shipping & Delivery</Link></li>
+                            <li><Link to="/track-order" className="text-[13px] text-[#444] hover:text-black transition-colors">Track your Order</Link></li>
+                            <li><Link to="/returns-exchange" className="text-[13px] text-[#444] hover:text-black transition-colors">Returns & Exchange Policy</Link></li>
                         </ul>
                     </div>
 
