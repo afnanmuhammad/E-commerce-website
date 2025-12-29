@@ -3,9 +3,12 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import { CartProvider } from "./context/CartContext";
 
+import SearchResults from "./pages/SearchResults";
+
 import Home from "./pages/Home";
 import Clearance from "./pages/Clearance";
 import NewArrivals from "./pages/NewArrivals";
+import CategoryPage from "./pages/CategoryPage";
 import Women from "./pages/Women";
 import Men from "./pages/Men";
 import Cart from "./pages/Cart";
@@ -38,11 +41,21 @@ const App = () => {
           <Route path="/signup" element={<SignUp />} />
 
           {/* MAIN ROUTES */}
+          <Route path="/search" element={<SearchResults />} />
           <Route path="/" element={<Home />} />
+
           <Route path="/new-arrivals" element={<NewArrivals />} />
-          <Route path="/clearance/*" element={<Clearance />} />
-          <Route path="/women/*" element={<Women />} />
-          <Route path="/men/*" element={<Men />} />
+          <Route path="/new-arrivals/:category" element={<CategoryPage section="New Arrivals" baseRoute="/new-arrivals" />} />
+
+          <Route path="/clearance" element={<Clearance />} />
+          <Route path="/clearance/:category" element={<CategoryPage section="Clearance" baseRoute="/clearance" />} />
+
+          <Route path="/women" element={<Women />} />
+          <Route path="/women/:category" element={<CategoryPage section="Women" baseRoute="/women" />} />
+
+          <Route path="/men" element={<Men />} />
+          <Route path="/men/:category" element={<CategoryPage section="Men" baseRoute="/men" />} />
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
 
