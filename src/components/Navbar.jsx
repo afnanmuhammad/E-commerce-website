@@ -8,11 +8,13 @@ import {
   HiOutlineSearch,
 } from "react-icons/hi";
 import CartModal from "./CartModal";
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const isHomePage = location.pathname === "/";
+  const { getCartCount } = useCart();
 
   const [openMenu, setOpenMenu] = useState(null);
   const [openUserMenu, setOpenUserMenu] = useState(false);
@@ -20,6 +22,11 @@ const Navbar = () => {
   const [scrollY, setScrollY] = useState(0); // track scroll
 
   const menuRef = useRef(null);
+  // ... (rest of the file content)
+
+  // ... inside the return statement, finding the CART button ...
+
+
 
   const womenCategories = [
     ["NEW ARRIVALS", "DRESSES", "JACKETS"],
@@ -88,11 +95,10 @@ const Navbar = () => {
 
       {/* FIXED NAVBAR */}
       <header
-        className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 py-2 transition-all duration-300 ${
-          scrollY > 200 || !isHomePage || openMenu
-            ? "bg-white border-b border-gray-100 text-[#1a1a1a]"
-            : "bg-transparent text-white"
-        }`}
+        className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 py-2 transition-all duration-300 ${scrollY > 200 || !isHomePage || openMenu
+          ? "bg-white border-b border-gray-100 text-[#1a1a1a]"
+          : "bg-transparent text-white"
+          }`}
       >
         {/* LOGO */}
         <Link to="/" className="flex items-center">
@@ -121,9 +127,8 @@ const Navbar = () => {
                 >
                   {link.name}
                   <MdKeyboardArrowDown
-                    className={`text-xl transition-transform ${
-                      openMenu === link.name ? "rotate-180" : ""
-                    }`}
+                    className={`text-xl transition-transform ${openMenu === link.name ? "rotate-180" : ""
+                      }`}
                   />
                 </NavLink>
               ) : (
@@ -140,11 +145,10 @@ const Navbar = () => {
                   className="fixed left-0 top-[70px] w-full bg-white/80 backdrop-blur-md py-14 px-10 shadow-2xl z-50"
                 >
                   <div
-                    className={`max-w-7xl mx-auto grid ${
-                      link.categories.length === 4
-                        ? "grid-cols-4"
-                        : "grid-cols-3"
-                    } gap-12`}
+                    className={`max-w-7xl mx-auto grid ${link.categories.length === 4
+                      ? "grid-cols-4"
+                      : "grid-cols-3"
+                      } gap-12`}
                   >
                     {link.categories.map((column, colIdx) => (
                       <div key={colIdx} className="flex flex-col space-y-6">
@@ -215,9 +219,11 @@ const Navbar = () => {
           {/* CART */}
           <button onClick={() => setIsCartOpen(true)} className="relative">
             <HiOutlineShoppingCart size={26} />
-            <span className="absolute -top-1.5 -right-2 bg-black text-white text-[10px] h-4 w-4 rounded-full flex items-center justify-center">
-              11
-            </span>
+            {getCartCount() > 0 && (
+              <span className="absolute -top-1.5 -right-2 bg-black text-white text-[10px] h-4 w-4 rounded-full flex items-center justify-center">
+                {getCartCount()}
+              </span>
+            )}
           </button>
         </div>
       </header>
