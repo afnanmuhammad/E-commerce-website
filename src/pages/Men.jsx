@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Cards from "../components/Cards";
 import Footer from "../components/Footer";
 import { HiViewGrid, HiViewList } from "react-icons/hi";
@@ -16,6 +17,7 @@ import img11 from "../assets/images/72.png";
 import img12 from "../assets/images/83.png";
 
 const Men = () => {
+  const [viewMode, setViewMode] = useState("grid");
   const products = [
     {
       image: img9,
@@ -103,9 +105,9 @@ const Men = () => {
       {/* Page Header / Breadcrumbs */}
       <div className="pt-2 pb-6 px-4 md:px-12 border-b border-gray-100 bg-white">
         <div className="max-w-[1600px] mx-auto flex items-center gap-2 text-[11px] md:text-[12px] tracking-widest font-bold uppercase">
-          <span className="text-[#999] cursor-pointer hover:text-black transition-colors">
+          <Link to="/" className="text-[#999] cursor-pointer hover:text-black transition-colors">
             HOME
-          </span>
+          </Link>
           <span className="text-[#999]">|</span>
           <span className="text-black">MEN'S CLOTHING</span>
         </div>
@@ -121,10 +123,16 @@ const Men = () => {
           <div className="flex items-center gap-6">
             {/* View Icons */}
             <div className="flex items-center gap-3 border-r border-gray-300 pr-6 mr-2">
-              <button className="text-[#333] hover:text-black transition-colors">
+              <button
+                onClick={() => setViewMode("grid")}
+                className={`${viewMode === "grid" ? "text-black" : "text-[#999]"} hover:text-black transition-colors`}
+              >
                 <HiViewGrid size={22} />
               </button>
-              <button className="text-[#999] hover:text-black transition-colors">
+              <button
+                onClick={() => setViewMode("list")}
+                className={`${viewMode === "list" ? "text-black" : "text-[#999]"} hover:text-black transition-colors`}
+              >
                 <HiViewList size={22} />
               </button>
             </div>
@@ -162,7 +170,10 @@ const Men = () => {
 
       {/* Product Grid */}
       <section className="py-12 px-4 md:px-12 max-w-[1600px] mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12">
+        <div className={`${viewMode === "grid"
+          ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-8 gap-y-12"
+          : "grid grid-cols-1 gap-y-6 max-w-4xl mx-auto"
+          }`}>
           {products.map((product, index) => (
             <Cards
               key={index}
@@ -172,6 +183,7 @@ const Men = () => {
               oldPrice={product.oldPrice}
               discount={product.discount}
               colors={product.colors}
+              viewMode={viewMode}
             />
           ))}
         </div>

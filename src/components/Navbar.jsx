@@ -20,6 +20,14 @@ const Navbar = () => {
   const [openUserMenu, setOpenUserMenu] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0); // track scroll
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+      setSearchQuery(""); // Optional: clear search after navigating
+    }
+  };
 
   const menuRef = useRef(null);
   // ... (rest of the file content)
@@ -181,11 +189,16 @@ const Navbar = () => {
               type="text"
               placeholder="Search here"
               className="p-2 w-48 border-b bg-transparent focus:w-64 transition-all focus:outline-none"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearch()}
             />
-            <HiOutlineSearch
-              size={20}
-              className="absolute right-2 top-1/2 -translate-y-1/2"
-            />
+            <button
+              onClick={handleSearch}
+              className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-black transition-colors"
+            >
+              <HiOutlineSearch size={20} />
+            </button>
           </div>
 
           {/* USER MENU */}
